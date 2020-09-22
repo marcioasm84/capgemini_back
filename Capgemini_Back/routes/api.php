@@ -23,11 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/', 'ContaController@index');
 
 Route::get('/buscarConta', 'ContaController@buscarConta');
-
-Route::get('/saldo/{chave_cliente}/{senha_cliente}', 'ContaController@saldo');
+Route::get('/saldo', 'ContaController@saldo');
 
 Route::post('/deposito', 'ContaController@deposito');
-
-Route::get('/deposito_terceiro/{agencia}/{agencia_digito}/{conta}/{conta_digito}/{valor}', 'ContaController@deposito_terceiro');
-    
 Route::post('/saque', 'ContaController@saque');
+
+//Route::get('/deposito_terceiro/{agencia}/{agencia_digito}/{conta}/{conta_digito}/{valor}', 'ContaController@deposito_terceiro');

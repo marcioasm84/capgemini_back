@@ -84,11 +84,18 @@ class ContaController extends Controller
         return $conta;
     }
     
-    public function saldo($chave_cliente, $senha_cliente) {
+    public function saldo(Request $request) {
         
+        $chave_cliente = $request->input('chave_cliente');
+        $senha_cliente = $request->input('senha_cliente');
+                
         $conta = $this->getConta($chave_cliente, $senha_cliente);
         
-        return "O saldo da conta de " . $conta->nome_cliente . " e " . $conta->saldo;
+        $retorno = new class{};
+        $retorno->mensagem = 'Seu saldo é '.number_format($conta->saldo, 2, ',', '.');
+        $retorno->status = 'sucesso';
+        $retorno->dados = $conta->saldo;
+        return response()->json($retorno);
     }
     
     public function deposito(Request $request) {
